@@ -1,0 +1,30 @@
+﻿  Weapon.cpp
+  stdafx.cpp
+  RolePlayingGame.cpp
+  Orc.cpp
+c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.h(60): error C2059: syntax error: '}'
+c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.h(60): error C2143: syntax error: missing ';' before '}'
+c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.h(60): error C2238: unexpected token(s) preceding ';'
+  Main.cpp
+c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.h(60): error C2059: syntax error: '}'
+c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.h(60): error C2143: syntax error: missing ';' before '}'
+c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.h(60): error C2238: unexpected token(s) preceding ';'
+  Item.cpp
+  GameCharacter.cpp
+c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.h(60): error C2059: syntax error: '}'
+c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.h(60): error C2143: syntax error: missing ';' before '}'
+c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.h(60): error C2238: unexpected token(s) preceding ';'
+  Cleric.cpp
+c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.h(60): error C2059: syntax error: '}'
+c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.h(60): error C2143: syntax error: missing ';' before '}'
+c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.h(60): error C2238: unexpected token(s) preceding ';'
+  Brawler.cpp
+c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.h(60): error C2059: syntax error: '}'
+c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.h(60): error C2143: syntax error: missing ';' before '}'
+c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.h(60): error C2238: unexpected token(s) preceding ';'
+  Blackwitch.cpp
+c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.h(60): error C2059: syntax error: '}'
+c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.h(60): error C2143: syntax error: missing ';' before '}'
+c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.h(60): error C2238: unexpected token(s) preceding ';'
+  Armour.cpp
+  Generating Code...

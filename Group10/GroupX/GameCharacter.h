@@ -3,7 +3,7 @@
 #include <vector>
 #include "Armour.h"
 #include "Weapon.h"
-
+#include "Item.h"
 using namespace std;
 enum CharacterState{Idle, Running, Sleeping, Walking, Defending, Dead};
 class GameCharacter
@@ -12,17 +12,17 @@ private:
 	std::string characterName_;
 	float health_;
 	float weightLimit_;
-	int weapon_;
-	int armour_;
+	int equippedWeapon_;
+	int equippedArmour_;
 	std::vector<Weapon>weapons_;
-	std::vector<Armour>armours_;
+	std::vector<Armour>armour_;
 	int food_;
 	CharacterState state_;
 public:
 	GameCharacter();
 
-	GameCharacter(std::string characterName, float health, float weightLimit, int weapon, int armour,
-		std::vector<Weapon>weapons, std::vector<Armour>armours);
+	GameCharacter(std::string characterName, float health, float weightLimit, int equippedWeapon, int equippedArmour,
+		std::vector<Weapon>weapons, std::vector<Armour>armour);
 	~GameCharacter();
 
 	void SetCharacterName(std::string characterName);
@@ -34,17 +34,17 @@ public:
 	void SetWeightLimit(float weightLimit);
 	float GetWeightLimit();
 
-	void SetWeapon(int weapon);
-	int GetWeapon();
+	void SetEquippedWeapon(int equippedWeapon);
+	int GetEquippedWeapon();
 
-	void SetArmour(int armour);
-	int GetArmour();
+	void SetEquippedArmour(int equippedArmour);
+	int GetEquippedArmour();
 
 	void SetWeapons(vector<Weapon>weapons);
 	vector<Weapon> GetWeapons();
 
-	void SetArmours(vector<Armour>armours);
-	vector<Armour> GetArmours();
+	void SetArmour(vector<Armour>armour);
+	vector<Armour> GetArmour();
 
 	virtual bool Attack(GameCharacter&character);
 
@@ -56,6 +56,24 @@ public:
 
 	virtual void Sleep();
 
-	Weapon 
+	Weapon GetWeapon(int index);
+
+	Armour GetArmour(int index);
+
+	bool PickUpWeapon(Weapon &weapon);
+
+	bool PickUpArmour(Armour &armour);
+
+	void DropItem(Armour &item);
+
+	void DropItem(Weapon &item);
+
+	bool EquipWeapon(int weapon);
+
+	GameCharacter GetState();
+
+	void AddFood(int amount);
+
+	void Eat();
 };
 

@@ -1,6 +1,6 @@
 #pragma once
 #include "Item.h"
-class Weapon 
+class Weapon : Item
 {
 private:
 	int weaponHitStrength_;

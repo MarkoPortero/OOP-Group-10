@@ -1,5 +1,5 @@
 #include "GameCharacter.h"
-
+#include "Item.h"
 
 
 GameCharacter::GameCharacter()
@@ -63,7 +63,7 @@ int GameCharacter::GetEquippedWeapon()
 
 void GameCharacter::SetEquippedArmour(int equippedArmour)
 {
-	equippedArmour_
+	equippedArmour_ = equippedArmour;
 }
 
 int GameCharacter::GetEquippedArmour()
@@ -98,12 +98,20 @@ bool GameCharacter::Attack(GameCharacter & character)
 
 void GameCharacter::Defend(int armour)
 {
+	Armour Equipped;
+	if (armour > 0 && armour < armour_.size())
+	{	
+		//May be required?
+		Equipped = armour_[armour];
+		//Change state..Change equipped..
+		state_ = Defending;
+		equippedArmour_ = armour;
+	}
+	else {
+		equippedArmour_ = -1;
+	}
 }
 
-GameCharacter GameCharacter::GetState()
-{
-	return GameCharacter();
-}
 
 void GameCharacter::AddFood(int amount)
 {
@@ -137,18 +145,20 @@ void GameCharacter::Sleep()
 }
 
 Weapon GameCharacter::GetWeapon(int index)
-{
-	return Weapon();
+{	
+	Weapon weaponReturn = weapons_[index];
+	return weaponReturn;
 }
 
 Armour GameCharacter::GetArmour(int index)
 {
-	return Armour();
+	Armour armourReturn = armour_[index];
+	return armourReturn;
 }
 
 bool GameCharacter::PickUpWeapon(Weapon &weapon)
 {
-	
+
 	return false;
 }
 
@@ -159,19 +169,65 @@ bool GameCharacter::PickUpArmour(Armour &armour)
 
 void GameCharacter::DropItem(Armour &item)
 {
+	//How deep do the values go? Check *literally* everything? Or just name/value/weight? who knows. 
 	std::string itemName = item.GetItemName;
 	bool found = false;
 	for (int i = 0; i < armour_.size(); i++) {
-		string search = 
-		if(itenmName == )
+		string search = itemName;
+		if (search == armour_[i].GetItemName) {
+			if (item.GetItemValue == armour_[i].GetItemValue) {
+				if (item.GetWeight == armour_[i].GetWeight) {
+					if (item.GetArmourHealth == armour_[i].GetArmourHealth) {
+						if (item.GetArmourType == armour_[i].GetArmourType) {
+							if (item.GetDefence == armour_[i].GetDefence) {
+								armour_.erase[i];
+							}
+						}
+					}
+
+				}
+			}
+
+		}
 	}
 }
 
-void GameCharacter::DropItem(Weapon & item)
+void GameCharacter::DropItem(Weapon &item)
 {
+	std::string itemName = item.GetItemName;
+	bool found = false;
+	for (int i = 0; i < weapons_.size(); i++) {
+		string search = itemName;
+		if (search == weapons_[i].GetItemName) {
+			if (item.GetItemValue == weapons_[i].GetItemValue) {
+				if (item.GetWeight == weapons_[i].GetWeight) {
+					if (item.GetWeaponHealth == weapons_[i].GetWeaponHealth) {
+						if (item.GetWeaponHitStrength == weapons_[i].GetWeaponHitStrength) {
+							armour_.erase[i];
+						}
+					}
+
+				}
+			}
+
+		}
+	}
 }
 
 bool GameCharacter::EquipWeapon(int weapon)
 {
+	if (weapon == -1)
+	{
+		equippedWeapon_ = -1;	
+		return true;
+	}
+	else if (weapon <= weapons_.size() - 1) {
+		return true;
+	}
 	return false;
+}
+
+CharacterState GameCharacter::GetState()
+{
+	return GameCharacter::state_;
 }

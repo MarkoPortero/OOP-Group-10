@@ -46,7 +46,7 @@ public:
 	void SetArmour(vector<Armour>armour);
 	vector<Armour> GetArmour();
 
-	virtual bool Attack(GameCharacter&character);
+	virtual bool Attack(GameCharacter&character)=0;
 
 	void Defend(int armour);
 
@@ -70,7 +70,7 @@ public:
 
 	bool EquipWeapon(int weapon);
 
-	GameCharacter GetState();
+	CharacterState GetState();
 
 	void AddFood(int amount);
 

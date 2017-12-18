@@ -2,29 +2,74 @@
   stdafx.cpp
   RolePlayingGame.cpp
   Orc.cpp
-c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.h(60): error C2059: syntax error: '}'
-c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.h(60): error C2143: syntax error: missing ';' before '}'
-c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.h(60): error C2238: unexpected token(s) preceding ';'
   Main.cpp
-c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.h(60): error C2059: syntax error: '}'
-c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.h(60): error C2143: syntax error: missing ';' before '}'
-c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.h(60): error C2238: unexpected token(s) preceding ';'
   Item.cpp
   GameCharacter.cpp
-c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.h(60): error C2059: syntax error: '}'
-c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.h(60): error C2143: syntax error: missing ';' before '}'
-c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.h(60): error C2238: unexpected token(s) preceding ';'
+c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.cpp(113): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.cpp(114): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.cpp(159): error C3867: 'Item::GetItemName': non-standard syntax; use '&' to create a pointer to member
+c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.cpp(163): error C3867: 'Item::GetItemName': non-standard syntax; use '&' to create a pointer to member
+c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.cpp(163): error C2679: binary '==': no operator found which takes a right-hand operand of type 'overloaded-function' (or there is no acceptable conversion)
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\include\system_error(372): note: could be 'bool std::operator ==(const std::error_condition &,const std::error_condition &) noexcept'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\include\system_error(366): note: or       'bool std::operator ==(const std::error_condition &,const std::error_code &) noexcept'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\include\system_error(360): note: or       'bool std::operator ==(const std::error_code &,const std::error_condition &) noexcept'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\include\system_error(354): note: or       'bool std::operator ==(const std::error_code &,const std::error_code &) noexcept'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\include\exception(342): note: or       'bool std::operator ==(const std::exception_ptr &,std::nullptr_t) throw()'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\include\exception(337): note: or       'bool std::operator ==(std::nullptr_t,const std::exception_ptr &) throw()'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\include\exception(332): note: or       'bool std::operator ==(const std::exception_ptr &,const std::exception_ptr &) throw()'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\include\xstring(3902): note: or       'bool std::operator ==<char,std::char_traits<char>,std::allocator<char>>(const std::basic_string<char,std::char_traits<char>,std::allocator<char>> &,const std::basic_string<char,std::char_traits<char>,std::allocator<char>> &) noexcept'
+  c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.cpp(163): note: while trying to match the argument list '(std::string, overloaded-function)'
+c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.cpp(164): error C2247: 'Item::GetItemValue' not accessible because 'Armour' uses 'private' to inherit from 'Item'
+  c:\users\markp\desktop\empty project\group10\groupx\item.h(18): note: see declaration of 'Item::GetItemValue'
+  c:\users\markp\desktop\empty project\group10\groupx\armour.h(4): note: see declaration of 'Armour'
+  c:\users\markp\desktop\empty project\group10\groupx\item.h(4): note: see declaration of 'Item'
+c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.cpp(164): error C3867: 'Item::GetItemValue': non-standard syntax; use '&' to create a pointer to member
+c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.cpp(165): error C2247: 'Item::GetWeight' not accessible because 'Armour' uses 'private' to inherit from 'Item'
+  c:\users\markp\desktop\empty project\group10\groupx\item.h(21): note: see declaration of 'Item::GetWeight'
+  c:\users\markp\desktop\empty project\group10\groupx\armour.h(4): note: see declaration of 'Armour'
+  c:\users\markp\desktop\empty project\group10\groupx\item.h(4): note: see declaration of 'Item'
+c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.cpp(165): error C3867: 'Item::GetWeight': non-standard syntax; use '&' to create a pointer to member
+c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.cpp(166): error C3867: 'Armour::GetArmourHealth': non-standard syntax; use '&' to create a pointer to member
+c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.cpp(167): error C3867: 'Armour::GetArmourType': non-standard syntax; use '&' to create a pointer to member
+c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.cpp(168): error C3867: 'Armour::GetDefence': non-standard syntax; use '&' to create a pointer to member
+c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.cpp(169): error C3867: 'std::vector<Armour,std::allocator<_Ty>>::erase': non-standard syntax; use '&' to create a pointer to member
+          with
+          [
+              _Ty=Armour
+          ]
+c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.cpp(169): error C2109: subscript requires array or pointer type
+c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.cpp(183): error C3867: 'Item::GetItemName': non-standard syntax; use '&' to create a pointer to member
+c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.cpp(187): error C3867: 'Item::GetItemName': non-standard syntax; use '&' to create a pointer to member
+c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.cpp(187): error C2679: binary '==': no operator found which takes a right-hand operand of type 'overloaded-function' (or there is no acceptable conversion)
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\include\system_error(372): note: could be 'bool std::operator ==(const std::error_condition &,const std::error_condition &) noexcept'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\include\system_error(366): note: or       'bool std::operator ==(const std::error_condition &,const std::error_code &) noexcept'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\include\system_error(360): note: or       'bool std::operator ==(const std::error_code &,const std::error_condition &) noexcept'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\include\system_error(354): note: or       'bool std::operator ==(const std::error_code &,const std::error_code &) noexcept'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\include\exception(342): note: or       'bool std::operator ==(const std::exception_ptr &,std::nullptr_t) throw()'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\include\exception(337): note: or       'bool std::operator ==(std::nullptr_t,const std::exception_ptr &) throw()'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\include\exception(332): note: or       'bool std::operator ==(const std::exception_ptr &,const std::exception_ptr &) throw()'
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\include\xstring(3902): note: or       'bool std::operator ==<char,std::char_traits<char>,std::allocator<char>>(const std::basic_string<char,std::char_traits<char>,std::allocator<char>> &,const std::basic_string<char,std::char_traits<char>,std::allocator<char>> &) noexcept'
+  c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.cpp(187): note: while trying to match the argument list '(std::string, overloaded-function)'
+c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.cpp(188): error C2247: 'Item::GetItemValue' not accessible because 'Weapon' uses 'private' to inherit from 'Item'
+  c:\users\markp\desktop\empty project\group10\groupx\item.h(18): note: see declaration of 'Item::GetItemValue'
+  c:\users\markp\desktop\empty project\group10\groupx\weapon.h(3): note: see declaration of 'Weapon'
+  c:\users\markp\desktop\empty project\group10\groupx\item.h(4): note: see declaration of 'Item'
+c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.cpp(188): error C3867: 'Item::GetItemValue': non-standard syntax; use '&' to create a pointer to member
+c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.cpp(189): error C2247: 'Item::GetWeight' not accessible because 'Weapon' uses 'private' to inherit from 'Item'
+  c:\users\markp\desktop\empty project\group10\groupx\item.h(21): note: see declaration of 'Item::GetWeight'
+  c:\users\markp\desktop\empty project\group10\groupx\weapon.h(3): note: see declaration of 'Weapon'
+  c:\users\markp\desktop\empty project\group10\groupx\item.h(4): note: see declaration of 'Item'
+c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.cpp(189): error C3867: 'Item::GetWeight': non-standard syntax; use '&' to create a pointer to member
+c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.cpp(190): error C3867: 'Weapon::GetWeaponHealth': non-standard syntax; use '&' to create a pointer to member
+c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.cpp(191): error C3867: 'Weapon::GetWeaponHitStrength': non-standard syntax; use '&' to create a pointer to member
+c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.cpp(192): error C3867: 'std::vector<Armour,std::allocator<_Ty>>::erase': non-standard syntax; use '&' to create a pointer to member
+          with
+          [
+              _Ty=Armour
+          ]
+c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.cpp(192): error C2109: subscript requires array or pointer type
   Cleric.cpp
-c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.h(60): error C2059: syntax error: '}'
-c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.h(60): error C2143: syntax error: missing ';' before '}'
-c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.h(60): error C2238: unexpected token(s) preceding ';'
   Brawler.cpp
-c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.h(60): error C2059: syntax error: '}'
-c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.h(60): error C2143: syntax error: missing ';' before '}'
-c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.h(60): error C2238: unexpected token(s) preceding ';'
   Blackwitch.cpp
-c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.h(60): error C2059: syntax error: '}'
-c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.h(60): error C2143: syntax error: missing ';' before '}'
-c:\users\markp\desktop\empty project\group10\groupx\gamecharacter.h(60): error C2238: unexpected token(s) preceding ';'
   Armour.cpp
   Generating Code...

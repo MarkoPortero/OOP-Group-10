@@ -65,9 +65,6 @@
     <ClInclude Include="Cleric.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Weaponry.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Orc.h">
       <Filter>Header Files</Filter>
     </ClInclude>

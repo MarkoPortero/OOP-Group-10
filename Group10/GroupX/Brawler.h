@@ -7,13 +7,16 @@ private:
 	int strength_;
 public:
 	Brawler();
-	Brawler(int punchDamage, int strength);
+	Brawler(int punchDamage, int strength, float health, std::string charactername, int food, float weightlimit, CharacterState state);
 	~Brawler();
 
-	void setPunchDamage(int punchDamage);
+	void SetPunchDamage(int punchDamage);
 	int GetPunchDamage();
 
-	virtual bool Attack(GameCharacter&character);
+	void SetStrength(int strength);
+	int GetStrength();
+
+	virtual bool Attack(GameCharacter&character) ;
 
 	virtual void Sleep();
 

@@ -6,52 +6,50 @@ Brawler::Brawler()
 {
 }
 
-Brawler::Brawler(int punchDamage, int strength)
+Brawler::Brawler(int punchDamage, int strength, float health, std::string charactername, int food, float weightlimit, CharacterState state)
 {
 	punchDamage_ = punchDamage;
 	strength_ = strength;
 }
 
+
 void Brawler::SetPunchDamage(int punchDamage)
 {
-	PunchDamage_ = punchDamage;
+	punchDamage_ = punchDamage;
 }
 
-int Brawler::GetPunchDamage()const
+int Brawler::GetPunchDamage()
 {
-	return punchDamage_;
+	return 0;
 }
+
 
 void Brawler::SetStrength(int strength)
 {
 	strength_ = strength;
 }
 
-int Brawler::GetStrength() const
+int Brawler::GetStrength()
 {
-	return strength_;
+	return 0;
 }
 
-/
-virtual bool Attack(GameCharacter&character)
+bool Brawler::Attack(GameCharacter &character)
 {
-
-
-
+	return false;
 }
 
-virtual void Sleep()
+void Brawler::Sleep()
 {
 }
 
-bool Brawl(GameCharacter&character)
+bool Brawler::Brawl(GameCharacter &character)
 {
-
-
-
-
-
+	return false;
 }
+
+
+
 
 Brawler::~Brawler()
 {

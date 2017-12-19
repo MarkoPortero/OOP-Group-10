@@ -36,7 +36,7 @@ bool Cleric::Attack(GameCharacter&character)
 		HitEglibile = false;			//hit requirements aren't met
 		return false;
 	}
-	
+
 	else if (HitEglibile == true)
 	{
 		int outcome = dis(gen);
@@ -53,7 +53,7 @@ bool Cleric::Attack(GameCharacter&character)
 
 	if (GameCharacter::GetEquippedArmour() == -1)
 	{
-	
+
 		prospecttohit = 80;
 	}
 
@@ -68,32 +68,32 @@ bool Cleric::Attack(GameCharacter&character)
 	}
 
 
-else if (outcome <= prospecttohit)
-{
-	// if the attack hits
-	float updatedcharhealth;
-	switch: (character.GetState())
+	else if (outcome <= prospecttohit)
 	{
-	case 1 charDefending:
-		updatedcharhealth = character.GetHealth() - (10);
-		character.SetHealth(updatedcharhealth);
-		break;
+		// if the attack hits
+		float updatedcharhealth;
+		switch: (character.GetState())
+		{
+		case 1 charDefending:
+			updatedcharhealth = character.GetHealth() - (10);
+			character.SetHealth(updatedcharhealth);
+			break;
 
-	case 2 charSleeping:
-		updatedcharhealth = character.GetHealth() - (100);
-		character.SetHealth(updatedcharhealth);
-		break;
+		case 2 charSleeping:
+			updatedcharhealth = character.GetHealth() - (100);
+			character.SetHealth(updatedcharhealth);
+			break;
 
-	case 3 charDead:
-		break;
+		case 3 charDead:
+			break;
 
-	default:
-		updatedcharhealth = character.GetHealth() - (20);
-		character.SetHealth(updatedcharhealth);
-		break;
+		default:
+			updatedcharhealth = character.GetHealth() - (20);
+			character.SetHealth(updatedcharhealth);
+			break;
+		}
+
 	}
-
-}
 	if (indicator > -1)
 	{
 		int originalarmour = character.GetArmour(indicator).GetArmourHealth();
@@ -122,12 +122,12 @@ if (armour_on = true)
 	std::random_device num2;
 	std::mt19937 gen(num2));
 
-std::uniform_real_distribution<> dis(10, 20);
-int outcome = dis(gen);
+	std::uniform_real_distribution<> dis(10, 20);
+	int outcome = dis(gen);
 
-int updatedweaponhealth = (this->GetWeapon(weaponindicator).GetWeaponHealth() - outcome);
-Weapon 1b = this->GetWeapon(indicator);
-this->SetWeapon(indicator, 1b);
+	int updatedweaponhealth = (this->GetWeapon(weaponindicator).GetWeaponHealth() - outcome);
+	Weapon 1b = this->GetWeapon(indicator);
+	this->SetWeapon(indicator, 1b);
 }
 
 if (this->GetWeapon(weaponindicator).GetWeaponHealth() <= 0)

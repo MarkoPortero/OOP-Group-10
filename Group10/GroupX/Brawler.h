@@ -16,10 +16,10 @@ public:
 	void SetStrength(int strength);
 	int GetStrength();
 
-	virtual bool Attack(GameCharacter&character) ;
+	virtual bool Attack(GameCharacter &character) ;
 
 	virtual void Sleep();
 
-	bool Brawl(GameCharacter&character);
+	bool Brawl(GameCharacter &character);
 };
 

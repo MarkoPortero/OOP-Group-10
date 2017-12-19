@@ -156,12 +156,33 @@ Armour GameCharacter::GetArmour(int index)
 
 bool GameCharacter::PickUpWeapon(Weapon &weapon)
 {
-
+	int currentTotalWeight = 0;
+	for (int x = 0; x < weapons_.size(); x++) {
+		currentTotalWeight += weapons_[x].GetWeight;
+	}
+	for (int x = 0; x < armour_.size(); x++) {
+		currentTotalWeight += armour_[x].GetWeight;
+	}
+	if (currentTotalWeight + weapon.GetWeight > GetWeightLimit) {
+		weapons_.push_back(weapon);
+		return true;
+	}	
 	return false;
 }
 
 bool GameCharacter::PickUpArmour(Armour &armour)
 {
+	int currentTotalWeight = 0;
+	for (int x = 0; x < weapons_.size(); x++) {
+		currentTotalWeight += weapons_[x].GetWeight;
+	}
+	for (int x = 0; x < armour_.size(); x++) {
+		currentTotalWeight += armour_[x].GetWeight;
+	}
+	if (currentTotalWeight + armour.GetWeight > GetWeightLimit) {
+		armour_.push_back(armour);
+		return true;
+	}
 	return false;
 }
 

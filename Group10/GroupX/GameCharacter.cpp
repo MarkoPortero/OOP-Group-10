@@ -125,8 +125,6 @@ void GameCharacter::Eat()
 	totalFoodConsumed = (food_ * 0.2);
 	healthRestored = (totalFoodConsumed / 4);
 	health_ = health_ += healthRestored;
-
-
 }
 
 void GameCharacter::Walk()

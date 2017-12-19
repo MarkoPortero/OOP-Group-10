@@ -1,6 +1,6 @@
 #pragma once
 #include "GameCharacter.h"
-class Brawler
+class Brawler : public GameCharacter
 {
 private:
 	int punchDamage_;
@@ -16,9 +16,9 @@ public:
 	void SetStrength(int strength);
 	int GetStrength();
 
-	virtual bool Attack(GameCharacter &character) ;
+	virtual bool Attack(GameCharacter &character) override;
 
-	virtual void Sleep();
+	virtual void Sleep() override;
 
 	bool Brawl(GameCharacter &character);
 };

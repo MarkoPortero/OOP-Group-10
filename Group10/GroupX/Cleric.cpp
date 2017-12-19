@@ -2,12 +2,12 @@
 #include <random>
 #include <vector>
 
-// Default Constructor 
+// Default Constructor
 Cleric::Cleric()
 {
 }
-// Custom Constructor 
-Cleric::Cleric(int pietyLevel, float health, std::string charactername, int food, float weightlimit, CharacterState state)
+// Custom Constructor
+Cleric::Cleric(int pietyLevel, float health, std::string characterName, int food, float weightlimit, CharacterState state)
 {
 	pietyLevel_ = pietyLevel;
 }
@@ -15,7 +15,7 @@ Cleric::Cleric(int pietyLevel, float health, std::string charactername, int food
 Cleric::~Cleric()
 {
 }
-// Setters and Getters 
+// Setters and Getters
 void  Cleric::SetPietyLevel(int pietyLevel)
 {
 	pietyLevel_ = pietyLevel;
@@ -26,151 +26,68 @@ int Cleric::GetPietyLevel() const
 	return pietyLevel_;
 }
 
+// The Attack Logic
 bool Cleric::Attack(GameCharacter&character)
 {
+	// Attack Variables
 	bool HitEglibile = true;
 	bool CharacterHit = true;
-
+	int armour_index = this->GetEquippedArmour();
+	// If no weapon or dead or health <=20 cannot be hit
 	if (this->GetEquippedWeapon() == -1 || character.GetState() == Dead || this->GetHealth() <= 20)
 	{
-		HitEglibile = false;			//hit requirements aren't met
-		return false;
+		// Attack is not possible
+		bool HitEglibile = false;
+		bool CharacterHit = false;
 	}
-
-	else if (HitEglibile == true)
+	if (HitEglibile == true || CharacterHit == true)
 	{
-		int outcome = dis(gen);
-		int prospecttohit;
-		int weaponindicator = this->GetEquippedWeapon();
+		//Attack is possbile
+		int outcome = (rand() % 100 + 1);     // generates random num in the range of 1 to 100
+
+		int index_weapon = this->GetEquippedWeapon();
 		bool charwearingarmour = true;
-		int indicator = character.GetEquippedArmour();
-
-		std::random_device num;
-		std::mt19937 gen(num());
-		std::uniform_real_distribution<> dis(1, 100);				//generates random number between 1 and 100
-
 	}
-
+	// if character has no armour
 	if (GameCharacter::GetEquippedArmour() == -1)
 	{
+		int prospecttohit;
+		prospecttohit = 80; // chance of success increases to 80
 
-		prospecttohit = 80;
 	}
 
-	else if (this->GetWeapon(character.GetEquippedWeapon().GetWeaponHitStrength() < character.GetArmour(indicator).Defend())
+
+	/*else if (this->GetWeapon(character.GetEquippedWeapon.GetWeaponHitStrength() < character.GetArmour(armour_index).GetDefence())
 	{
-		prospecttohit = 20;
-	}
 
-	else if (this->GetWeapon(GetEquippedWeapon()).GetWeaponHitStrength() > character.GetArmour(indicator).Defend())
-	{
-		prospecttohit = 60;
-	}
-
-
-	else if (outcome <= prospecttohit)
-	{
-		// if the attack hits
-		float updatedcharhealth;
-		switch: (character.GetState())
-		{
-		case 1 charDefending:
-			updatedcharhealth = character.GetHealth() - (10);
-			character.SetHealth(updatedcharhealth);
-			break;
-
-		case 2 charSleeping:
-			updatedcharhealth = character.GetHealth() - (100);
-			character.SetHealth(updatedcharhealth);
-			break;
-
-		case 3 charDead:
-			break;
-
-		default:
-			updatedcharhealth = character.GetHealth() - (20);
-			character.SetHealth(updatedcharhealth);
-			break;
-		}
-
-	}
-	if (indicator > -1)
-	{
-		int originalarmour = character.GetArmour(indicator).GetArmourHealth();
-		int updatedarmour = originalarmour - 10;
-		std::cout << "The updated armour health: " << character.GetArmour(indicator).GetArmourHealth() << std::endl;
-
-
-		Armour armour1a = character.GetArmour(indicator);
-		armour1a.SetArmourHealth(newarmourhealth);
-		GameCharacter::SetArmour(indicator, armour1a);
-		std::cout << "The armour health: " << character.GetArmour(indicator).GetArmourHealth() << std::endl;
-	}
-
-	if (character.GetArmour(indicator).GetArmourHealth() <= 0 && indicator > -1)
-	{
-		character.DropItem(character.GetArmour(indicator)); //removes armour from vector
-	}
+	prospecttohit = 20;
+	}*/
 }
-else
-{
-	// if the attack is unsuccessful 
-	CharacterHit = false;
-}
-if (armour_on = true)
-{ //if character is wearing armour deal damage to weapon
-	std::random_device num2;
-	std::mt19937 gen(num2));
-
-	std::uniform_real_distribution<> dis(10, 20);
-	int outcome = dis(gen);
-
-	int updatedweaponhealth = (this->GetWeapon(weaponindicator).GetWeaponHealth() - outcome);
-	Weapon 1b = this->GetWeapon(indicator);
-	this->SetWeapon(indicator, 1b);
-}
-
-if (this->GetWeapon(weaponindicator).GetWeaponHealth() <= 0)
-{
-	this->DropItem(this->GetWeapon(weaponindicator));
-}
-return CharacterHit; //temporary value
-}
-
-
-void Cleric::Sleep()
-{
-	int updatedhealth = (this->GetHealth() + 20);
-	GameCharacter::Sleep();
-
-	if (updatedhealth > 100)
-	{
-		updatedhealth = 100;
-	}
-	this->SetHealth(updatedhealth);
-
-}
-
-
 
 void Cleric::PrayFor(GameCharacter &character)
 {
-	std::mt19937 gen(num());
-	std::uniform_real_distribution<> dis(1, 100);
-	std::random_device num;
+	int outcome = (rand() % 100 + 1);
 
-	int outcome = dis(gen);
-
-	if (outcome <= 50)
+	if (outcome <= 50) // if success <= 50 heal the character
 	{
-		// if the number <=  50 then heal character
-		int updatedhealth = character.GetHealth() + (5 * this->GetPietyLevel());
-		character.SetHealth(updatedhealth);
-		if (character.GetHealth() > 100)
-		{
-			// if the heal makes health exceed 100 set health to 100
-			character.SetHealth(100);
-		}
+		int updated_health = character.GetHealth() + (5 * this->GetPietyLevel);
+		character.SetHealth(updated_health); // updates the health
+	}
+	else if (character.GetHealth() > 100) // resets health to 100 if it exceeds 100
+	{
+		character.SetHealth(100);
 	}
 }
 
+void Cleric::Sleep()
+{
+	GameCharacter::Sleep();
+	// char health updated by 20% as cleric
+	int updated_health = this->GetHealth() + 20;
+	//  resets health to 100 if it exceeds 100
+	if (updated_health > 100)
+	{
+		updated_health = 100;
+	}
+	this->SetHealth(updated_health);
+}

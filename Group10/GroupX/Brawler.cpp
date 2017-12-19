@@ -36,7 +36,7 @@ int Brawler::GetStrength()
 
 bool Brawler::Attack(GameCharacter &character)
 {
-	
+
 	bool hitSuccess = false;
 	bool weaponDamagePossible = false;
 	//Rosas failure check
@@ -176,6 +176,96 @@ void Brawler::Sleep()
 
 bool Brawler::Brawl(GameCharacter &character)
 {
+	bool hitSuccess = false;
+	//Rosas failure check
+	if (character.GetState() == Dead || GetHealth() <= 20)
+	{
+
+		//Else return false 
+		return false;
+	}
+
+	//Temp weap / Armour 
+
+	Armour DefenderArmour;
+	//Make a random hit chance - Needs to be seeded 
+	int hitchance = rand() % 100 + 1;
+
+	//check if character has no armour
+	if (character.GetEquippedArmour == -1) {
+		if (hitchance <= 80) {
+			hitSuccess = true;
+		}
+	}
+	//If character has armour equipped, get the details of that armour - Maybe needs refactoring
+	if (character.GetEquippedArmour != -1) {
+		DefenderArmour = character.GetArmour(GetEquippedArmour());
+		//If the punch is better than his armour..
+		if (punchDamage_ < DefenderArmour.GetDefence) {
+			if (hitchance <= 20) {
+				hitSuccess = true;
+			}
+		}
+		//Less than/equal to? Assuming attacker has the advantage
+		else if (punchDamage_ >= DefenderArmour.GetDefence) {
+			if (hitchance <= 60) {
+				hitSuccess = true;
+			}
+		}
+
+	}
+
+
+	//Deal damage
+	if (hitSuccess == true)
+	{
+		//Hit was successful..Take away armour health
+		int curArmourHealth = character.GetArmour(GetEquippedArmour()).GetArmourHealth() - 10;
+		character.GetArmour(GetEquippedArmour()).SetArmourHealth(curArmourHealth);
+		if (curArmourHealth <= 0) {
+			character.DropItem(GetArmour(GetEquippedArmour()));
+		}
+		//Check brawler strength bonus
+		int strength = this->GetStrength;
+		strength = (strength / 10) * 5;
+		//Using Rosa's switch idea
+		switch (character.GetState())
+		{
+			//Check if the state..If defending do 10% damage + Brawler strength damage
+		case Defending:
+			float totalHealth = character.GetHealth();
+			float damage = ((totalHealth / 100) * 10 + strength) / 2;
+			character.SetHealth(totalHealth - damage);
+			break;
+			//Sleeping insta kill
+		case Sleeping:
+			character.SetHealth(0);
+			//If the person is dead...Any point dropping their armour?
+			break;
+			//Idle 20% damage
+		case Idle:
+			float totalHealth = character.GetHealth();
+			float damage = ((totalHealth / 100) * 20 + strength) / 2;
+			character.SetHealth(totalHealth - damage);
+			break;
+			//running  20% damage
+		case Running:
+			float totalHealth = character.GetHealth();
+			float damage = ((totalHealth / 100) * 20 + strength) / 2;
+			character.SetHealth(totalHealth - damage);
+			break;
+			//walking  20% damage
+		case Walking:
+			float totalHealth = character.GetHealth();
+			float damage = ((totalHealth / 100) * 20 + strength) / 2;
+			character.SetHealth(totalHealth - damage);
+			break;
+		}
+
+		//Attack successful
+		return true;
+	}
+	return false;
 
 }
 

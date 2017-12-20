@@ -1,19 +1,20 @@
 #pragma once
 #include "Item.h"
-class Weapon : Item
+#include <string>
+class Weapon : public Item
 {
 private:
 	int weaponHitStrength_;
 	int weaponHealth_;
 public:
 	Weapon();
-	Weapon(int weaponHitStrength, int weaponHealth);
+	Weapon(std::string weaponName, int value, float weight, int weaponHitStrength, int weaponHealth);
 	~Weapon();
 
 	void SetWeaponHitStrength(int weaponHitStrength);
 	int GetWeaponHitStrength();
 
-	void SetWeaponHealth_(int weaponHealth_);
+	void SetWeaponHealth_(int weaponHealth);
 	int GetWeaponHealth();
 };
 

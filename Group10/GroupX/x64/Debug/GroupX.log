@@ -1,1 +1,12 @@
-﻿
+﻿  Cleric.cpp
+c:\users\markp\desktop\empty project\group10\groupx\cleric.cpp(132): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\markp\desktop\empty project\group10\groupx\cleric.cpp(133): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\markp\desktop\empty project\group10\groupx\cleric.cpp(145): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\markp\desktop\empty project\group10\groupx\cleric.cpp(151): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\markp\desktop\empty project\group10\groupx\cleric.cpp(124): warning C4715: 'Cleric::Attack': not all control paths return a value
+RolePlayingGame.obj : error LNK2005: main already defined in Main.obj
+Blackwitch.obj : error LNK2001: unresolved external symbol "public: virtual bool __cdecl Blackwitch::Attack(class GameCharacter &)" (?Attack@Blackwitch@@UEAA_NAEAVGameCharacter@@@Z)
+Blackwitch.obj : error LNK2001: unresolved external symbol "public: virtual void __cdecl Blackwitch::Sleep(void)" (?Sleep@Blackwitch@@UEAAXXZ)
+Orc.obj : error LNK2001: unresolved external symbol "public: virtual bool __cdecl Orc::Attack(class GameCharacter &)" (?Attack@Orc@@UEAA_NAEAVGameCharacter@@@Z)
+Orc.obj : error LNK2001: unresolved external symbol "public: virtual void __cdecl Orc::Sleep(void)" (?Sleep@Orc@@UEAAXXZ)
+C:\Users\MarkP\Desktop\Empty project\Group10\x64\Debug\GroupX.exe : fatal error LNK1120: 4 unresolved externals

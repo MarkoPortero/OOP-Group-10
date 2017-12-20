@@ -2,6 +2,7 @@
 #include <string>
 class Item
 {
+private:
 	std::string itemName_;
 	int itemValue_;
 	float weight_;

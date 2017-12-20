@@ -21,7 +21,7 @@ void  Cleric::SetPietyLevel(int pietyLevel)
 	pietyLevel_ = pietyLevel;
 }
 
-int Cleric::GetPietyLevel() const
+int Cleric::GetPietyLevel()
 {
 	return pietyLevel_;
 }
@@ -29,39 +29,98 @@ int Cleric::GetPietyLevel() const
 // The Attack Logic
 bool Cleric::Attack(GameCharacter&character)
 {
-	// Attack Variables
-	bool HitEglibile = true;
-	bool CharacterHit = true;
-	int armour_index = this->GetEquippedArmour();
-	// If no weapon or dead or health <=20 cannot be hit
-	if (this->GetEquippedWeapon() == -1 || character.GetState() == Dead || this->GetHealth() <= 20)
+
+	bool successfulattack = true;
+	bool hitSuccess = true;
+	bool weaponDamagePossible = true;
+	int weapon_index = this->GetEquippedWeapon();
+	//Rosas failure check .. attacks not possible
+	if (GetEquippedWeapon() == -1 || character.GetState() == Dead || GetHealth() <= 20)
 	{
-		// Attack is not possible
-		bool HitEglibile = false;
-		bool CharacterHit = false;
+		hitSuccess = false;
+		weaponDamagePossible = false;
+		//Else return false
+		return false;
 	}
-	if (HitEglibile == true || CharacterHit == true)
+	if (hitSuccess = true)
 	{
-		//Attack is possbile
-		int outcome = (rand() % 100 + 1);     // generates random num in the range of 1 to 100
+		//Temp weap / Armour
+		//Make a random hit chance - Needs to be seeded
+		int hitchance;
+		int outcome = rand() % 100 + 1; // generates a random number between 1 and 100
+		bool charhasarmour = true;
+		int armour_index = character.GetEquippedArmour();
 
-		int index_weapon = this->GetEquippedWeapon();
-		bool charwearingarmour = true;
+		//check if character has no armour
+		if (character.GetEquippedArmour() == -1)
+		{
+			hitchance = 80;
+		}
+		else if (this->GetWeapon(GetEquippedWeapon()).GetWeaponHitStrength() < character.GetArmour(armour_index).GetDefence()) {
+			hitchance = 20;
+		}
+		else if (this->GetWeapon(GetEquippedWeapon()).GetWeaponHitStrength() > character.GetArmour(armour_index).GetDefence()) {
+			hitchance = 60;
+		}
+
+		if (outcome <= hitchance)
+		{
+			float totalHealth;
+			switch (character.GetState())
+			{
+				//Hit was successful..Take away armour health
+			case Defending:
+				// Health decreased by 10%
+				totalHealth = character.GetHealth() - (10);
+				character.SetHealth(totalHealth);
+				break;
+			case Sleeping:
+				// health decreased by 100%
+				totalHealth = character.GetHealth() - (100);
+				character.SetHealth(totalHealth);
+				break;
+			case Dead:
+				// no effect
+				break;
+			default:
+				// All other states health decreases by 20%
+				totalHealth = (character.GetHealth() - (20));
+				character.SetHealth(totalHealth);
+				break;
+			}
+
+			if (armour_index > -1)
+			{
+
+				int armour_health = character.GetArmour(armour_index).GetArmourHealth();
+				int totalahealth = (armour_health - 10);
+				Armour bc;
+				bc.SetArmourHealth(totalahealth);
+			}
+			if (character.GetArmour(armour_index).GetArmourHealth() <= 0 && armour_index > -1)
+			{
+				character.DropItem(character.GetArmour(armour_index)); //removes from item from armour vector
+			}
+
+		}
+		else
+		{
+			//Damage weapon
+			if (successfulattack == false) {
+				int outcome = rand() % (21 - 10) + 1;
+				//Take weapon damage if the enemy is wearing armour.
+				int wepHealth = GetWeapon(GetEquippedWeapon()).GetWeaponHealth();
+				int newhealth = 0;
+				newhealth -= (wepHealth / 100)*outcome;
+				GetWeapon(GetEquippedWeapon()).SetWeaponHealth_(newhealth);
+
+				//Check if the weapon should be dropped
+				if (newhealth < 0) {
+					this->DropItem(GetWeapon(GetEquippedWeapon()));
+				}
+			}
+		}
 	}
-	// if character has no armour
-	if (GameCharacter::GetEquippedArmour() == -1)
-	{
-		int prospecttohit;
-		prospecttohit = 80; // chance of success increases to 80
-
-	}
-
-
-	/*else if (this->GetWeapon(character.GetEquippedWeapon.GetWeaponHitStrength() < character.GetArmour(armour_index).GetDefence())
-	{
-
-	prospecttohit = 20;
-	}*/
 }
 
 void Cleric::PrayFor(GameCharacter &character)
@@ -70,7 +129,7 @@ void Cleric::PrayFor(GameCharacter &character)
 
 	if (outcome <= 50) // if success <= 50 heal the character
 	{
-		int updated_health = character.GetHealth() + (5 * this->GetPietyLevel);
+		int updated_health = character.GetHealth() + (5 * GetPietyLevel());
 		character.SetHealth(updated_health); // updates the health
 	}
 	else if (character.GetHealth() > 100) // resets health to 100 if it exceeds 100

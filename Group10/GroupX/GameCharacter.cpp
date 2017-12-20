@@ -1,12 +1,19 @@
 #include "GameCharacter.h"
 #include "Item.h"
+#include "Weapon.h"
+#include "Armour.h"
+#include "Blackwitch.h"
+#include "Brawler.h"
+#include "Cleric.h"
+#include "Orc.h"
 
 
 GameCharacter::GameCharacter()
 {
 }
 
-GameCharacter::GameCharacter(std::string characterName, float health, float weightLimit, int equippedWeapon, int equippedArmour, std::vector<Weapon> weapons, std::vector<Armour> armour)
+GameCharacter::GameCharacter(std::string characterName, float health, float weightLimit, int equippedWeapon, int equippedArmour, 
+	std::vector<Weapon> weapons, std::vector<Armour> armour, int food)
 {
 	characterName_ = characterName;
 	health_ = health;
@@ -15,6 +22,7 @@ GameCharacter::GameCharacter(std::string characterName, float health, float weig
 	equippedArmour_ = equippedArmour;
 	weapons_ = weapons;
 	armour_ = armour;
+	food_ = food;
 }
 
 GameCharacter::~GameCharacter()
@@ -69,6 +77,16 @@ void GameCharacter::SetEquippedArmour(int equippedArmour)
 int GameCharacter::GetEquippedArmour()
 {
 	return equippedArmour_;
+}
+
+void GameCharacter::SetFood(int food)
+{
+	food_ = food;
+}
+
+int GameCharacter::GetFood()
+{
+	return food_;
 }
 
 void GameCharacter::SetWeapons(vector<Weapon> weapons)
@@ -158,12 +176,12 @@ bool GameCharacter::PickUpWeapon(Weapon &weapon)
 {
 	int currentTotalWeight = 0;
 	for (int x = 0; x < weapons_.size(); x++) {
-		currentTotalWeight += weapons_[x].GetWeight;
+		currentTotalWeight += weapons_[x].GetWeight();
 	}
 	for (int x = 0; x < armour_.size(); x++) {
-		currentTotalWeight += armour_[x].GetWeight;
+		currentTotalWeight += armour_[x].GetWeight();
 	}
-	if (currentTotalWeight + weapon.GetWeight > GetWeightLimit) {
+	if (currentTotalWeight + weapon.GetWeight() > GetWeightLimit()) {
 		weapons_.push_back(weapon);
 		return true;
 	}	
@@ -174,12 +192,12 @@ bool GameCharacter::PickUpArmour(Armour &armour)
 {
 	int currentTotalWeight = 0;
 	for (int x = 0; x < weapons_.size(); x++) {
-		currentTotalWeight += weapons_[x].GetWeight;
+		currentTotalWeight += weapons_[x].GetWeight();
 	}
 	for (int x = 0; x < armour_.size(); x++) {
-		currentTotalWeight += armour_[x].GetWeight;
+		currentTotalWeight += armour_[x].GetWeight();
 	}
-	if (currentTotalWeight + armour.GetWeight > GetWeightLimit) {
+	if (currentTotalWeight + armour.GetWeight() > GetWeightLimit()) {
 		armour_.push_back(armour);
 		return true;
 	}
@@ -189,17 +207,17 @@ bool GameCharacter::PickUpArmour(Armour &armour)
 void GameCharacter::DropItem(Armour &item)
 {
 	//How deep do the values go? Check *literally* everything? Or just name/value/weight? who knows. 
-	std::string itemName = item.GetItemName;
+	std::string itemName = item.GetItemName();
 	bool found = false;
 	for (int i = 0; i < armour_.size(); i++) {
 		string search = itemName;
-		if (search == armour_[i].GetItemName) {
-			if (item.GetItemValue == armour_[i].GetItemValue) {
-				if (item.GetWeight == armour_[i].GetWeight) {
-					if (item.GetArmourHealth == armour_[i].GetArmourHealth) {
-						if (item.GetArmourType == armour_[i].GetArmourType) {
-							if (item.GetDefence == armour_[i].GetDefence) {
-								armour_.erase[i];
+		if (search == armour_[i].GetItemName()) {
+			if (item.GetItemValue() == armour_[i].GetItemValue()) {
+				if (item.GetWeight() == armour_[i].GetWeight()) {
+					if (item.GetArmourHealth() == armour_[i].GetArmourHealth()) {
+						if (item.GetArmourType() == armour_[i].GetArmourType()) {
+							if (item.GetDefence() == armour_[i].GetDefence()) {
+								armour_.erase(armour_.begin()+i);
 							}
 						}
 					}
@@ -213,16 +231,16 @@ void GameCharacter::DropItem(Armour &item)
 
 void GameCharacter::DropItem(Weapon &item)
 {
-	std::string itemName = item.GetItemName;
+	std::string itemName = item.GetItemName();
 	bool found = false;
 	for (int i = 0; i < weapons_.size(); i++) {
 		string search = itemName;
-		if (search == weapons_[i].GetItemName) {
-			if (item.GetItemValue == weapons_[i].GetItemValue) {
-				if (item.GetWeight == weapons_[i].GetWeight) {
-					if (item.GetWeaponHealth == weapons_[i].GetWeaponHealth) {
-						if (item.GetWeaponHitStrength == weapons_[i].GetWeaponHitStrength) {
-							armour_.erase[i];
+		if (search == weapons_[i].GetItemName()) {
+			if (item.GetItemValue() == weapons_[i].GetItemValue()) {
+				if (item.GetWeight() == weapons_[i].GetWeight()) {
+					if (item.GetWeaponHealth() == weapons_[i].GetWeaponHealth()) {
+						if (item.GetWeaponHitStrength() == weapons_[i].GetWeaponHitStrength()) {
+							armour_.erase(armour_.begin() + i);
 						}
 					}
 

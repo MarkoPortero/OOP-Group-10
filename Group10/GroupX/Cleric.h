@@ -11,7 +11,7 @@ public:
 	~Cleric(); // default deconstructor
 			   //Setters and Getters
 	void SetPietyLevel(int pietyLevel);
-	int GetPietyLevel() const;
+	int GetPietyLevel();
 	// Member Functions
 	virtual bool Attack(GameCharacter&character) override;
 	void PrayFor(GameCharacter&character);

@@ -7,7 +7,7 @@ private:
 	int strength_;
 public:
 	Brawler();
-	Brawler(int punchDamage, int strength, float health, std::string charactername, int food, float weightlimit, CharacterState state);
+	Brawler(std::string name, float health, float weightLimit, int food, CharacterState state, int punchDamage, int strength);
 	~Brawler();
 
 	void SetPunchDamage(int punchDamage);

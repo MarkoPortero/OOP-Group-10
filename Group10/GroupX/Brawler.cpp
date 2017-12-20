@@ -6,7 +6,7 @@ Brawler::Brawler()
 {
 }
 
-Brawler::Brawler(int punchDamage, int strength, float health, std::string charactername, int food, float weightlimit, CharacterState state)
+Brawler::Brawler(std::string name, float health, float weightLimit, int food, CharacterState state, int punchDamage, int strength)
 {
 	punchDamage_ = punchDamage;
 	strength_ = strength;
@@ -44,7 +44,7 @@ bool Brawler::Attack(GameCharacter &character)
 	{
 		if (GetEquippedWeapon() == -1) {
 			//Brawl if there is no weapon equipped!
-			this->Brawl;
+			Brawl(character);
 		}
 		//Else return false 
 		return false;
@@ -58,16 +58,16 @@ bool Brawler::Attack(GameCharacter &character)
 		int hitchance = rand() % 100 + 1;
 
 		//check if character has no armour
-		if (character.GetEquippedArmour == -1) {
+		if (character.GetEquippedArmour() == -1) {
 			if (hitchance <= 80) {
 				hitSuccess = true;
 			}
 		}
 		//If character has armour equipped, get the details of that armour - Maybe needs refactoring
-		if (character.GetEquippedArmour != -1) {
+		if (character.GetEquippedArmour() != -1) {
 			DefenderArmour = character.GetArmour(GetEquippedArmour());
 			//If Armour is better than weapon..
-			if (CurrentWeapon.GetWeaponHitStrength < DefenderArmour.GetDefence) {
+			if (CurrentWeapon.GetWeaponHitStrength() < DefenderArmour.GetDefence()) {
 				if (hitchance <= 20) {
 					hitSuccess = true;
 				}
@@ -77,7 +77,7 @@ bool Brawler::Attack(GameCharacter &character)
 				}
 			}
 			//Less than/equal to? Assuming attacker has the advantage
-			else if (CurrentWeapon.GetWeaponHitStrength >= DefenderArmour.GetDefence) {
+			else if (CurrentWeapon.GetWeaponHitStrength() >= DefenderArmour.GetDefence()) {
 				if (hitchance <= 60) {
 					hitSuccess = true;
 				}
@@ -92,10 +92,10 @@ bool Brawler::Attack(GameCharacter &character)
 		if (weaponDamagePossible == true) {
 			int damageAmount = rand() % (21 - 10) + 10;
 			//Take weapon damage if the enemy is wearing armour.
-			int wepHealth = this->GetWeapon(GetEquippedWeapon()).GetWeaponHealth();
-			int newhealth;
+			int wepHealth = GetWeapon(GetEquippedWeapon()).GetWeaponHealth();
+			int newhealth = 0;
 			newhealth -= (wepHealth / 100)*damageAmount;
-			this->GetWeapon(GetEquippedWeapon()).SetWeaponHealth_(newhealth);
+			GetWeapon(GetEquippedWeapon()).SetWeaponHealth_(newhealth);
 
 			//Check if the weapon should be dropped
 			if (newhealth < 0) {
@@ -113,15 +113,16 @@ bool Brawler::Attack(GameCharacter &character)
 				character.DropItem(GetArmour(GetEquippedArmour()));
 			}
 			//Check brawler strength bonus
-			int strength = this->GetStrength;
+			int strength = this->GetStrength();
 			strength = (strength / 10) * 5;
 			//Using Rosa's switch idea
+			float totalHealth = character.GetHealth(); 
+			float damage;
 			switch (character.GetState())
 			{
 				//Check if the state..If defending do 10% damage + Brawler strength damage
 			case Defending:
-				float totalHealth = character.GetHealth();
-				float damage = (totalHealth / 100) * 10 + strength;
+				damage = (totalHealth / 100) * 10 + strength;
 				character.SetHealth(totalHealth - damage);
 				break;
 				//Sleeping insta kill
@@ -131,20 +132,17 @@ bool Brawler::Attack(GameCharacter &character)
 				break;
 				//Idle 20% damage
 			case Idle:
-				float totalHealth = character.GetHealth();
-				float damage = (totalHealth / 100) * 20 + strength;
+				damage = (totalHealth / 100) * 20 + strength;
 				character.SetHealth(totalHealth - damage);
 				break;
 				//running  20% damage
 			case Running:
-				float totalHealth = character.GetHealth();
-				float damage = (totalHealth / 100) * 20 + strength;
+				damage = (totalHealth / 100) * 20 + strength;
 				character.SetHealth(totalHealth - damage);
 				break;
 				//walking  20% damage
 			case Walking:
-				float totalHealth = character.GetHealth();
-				float damage = (totalHealth / 100) * 20 + strength;
+				damage = (totalHealth / 100) * 20 + strength;
 				character.SetHealth(totalHealth - damage);
 				break;
 			}
@@ -180,7 +178,6 @@ bool Brawler::Brawl(GameCharacter &character)
 	//Rosas failure check
 	if (character.GetState() == Dead || GetHealth() <= 20)
 	{
-
 		//Else return false 
 		return false;
 	}
@@ -192,22 +189,22 @@ bool Brawler::Brawl(GameCharacter &character)
 	int hitchance = rand() % 100 + 1;
 
 	//check if character has no armour
-	if (character.GetEquippedArmour == -1) {
+	if (character.GetEquippedArmour() == -1) {
 		if (hitchance <= 80) {
 			hitSuccess = true;
 		}
 	}
 	//If character has armour equipped, get the details of that armour - Maybe needs refactoring
-	if (character.GetEquippedArmour != -1) {
+	if (character.GetEquippedArmour() != -1) {
 		DefenderArmour = character.GetArmour(GetEquippedArmour());
 		//If the punch is better than his armour..
-		if (punchDamage_ < DefenderArmour.GetDefence) {
+		if (punchDamage_ < DefenderArmour.GetDefence()) {
 			if (hitchance <= 20) {
 				hitSuccess = true;
 			}
 		}
 		//Less than/equal to? Assuming attacker has the advantage
-		else if (punchDamage_ >= DefenderArmour.GetDefence) {
+		else if (punchDamage_ >= DefenderArmour.GetDefence()) {
 			if (hitchance <= 60) {
 				hitSuccess = true;
 			}
@@ -226,15 +223,16 @@ bool Brawler::Brawl(GameCharacter &character)
 			character.DropItem(GetArmour(GetEquippedArmour()));
 		}
 		//Check brawler strength bonus
-		int strength = this->GetStrength;
+		int strength = GetStrength();
 		strength = (strength / 10) * 5;
 		//Using Rosa's switch idea
+		float totalHealth = character.GetHealth();
+		float damage;
 		switch (character.GetState())
 		{
 			//Check if the state..If defending do 10% damage + Brawler strength damage
 		case Defending:
-			float totalHealth = character.GetHealth();
-			float damage = ((totalHealth / 100) * 10 + strength) / 2;
+			damage = ((totalHealth / 100) * 10 + strength) / 2;
 			character.SetHealth(totalHealth - damage);
 			break;
 			//Sleeping insta kill
@@ -244,20 +242,17 @@ bool Brawler::Brawl(GameCharacter &character)
 			break;
 			//Idle 20% damage
 		case Idle:
-			float totalHealth = character.GetHealth();
-			float damage = ((totalHealth / 100) * 20 + strength) / 2;
+			damage = ((totalHealth / 100) * 20 + strength) / 2;
 			character.SetHealth(totalHealth - damage);
 			break;
 			//running  20% damage
 		case Running:
-			float totalHealth = character.GetHealth();
-			float damage = ((totalHealth / 100) * 20 + strength) / 2;
+			damage = ((totalHealth / 100) * 20 + strength) / 2;
 			character.SetHealth(totalHealth - damage);
 			break;
 			//walking  20% damage
 		case Walking:
-			float totalHealth = character.GetHealth();
-			float damage = ((totalHealth / 100) * 20 + strength) / 2;
+			damage = ((totalHealth / 100) * 20 + strength) / 2;
 			character.SetHealth(totalHealth - damage);
 			break;
 		}

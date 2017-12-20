@@ -6,10 +6,8 @@ Brawler::Brawler()
 {
 }
 
-Brawler::Brawler(std::string name, float health, float weightLimit, int food, CharacterState state, int punchDamage, int strength)
-{
-	punchDamage_ = punchDamage;
-	strength_ = strength;
+Brawler::Brawler(std::string name, float health, float weightLimit, int food, CharacterState state, int punchDamage, int strength) :
+	GameCharacter{name, health, weightLimit, food, state}, punchDamage_{ punchDamage }, strength_{ strength } {
 }
 
 
@@ -161,7 +159,7 @@ void Brawler::Sleep()
 	//Get health
 	float totalHealth = GetHealth();
 	//Get 20% of health - Add 20% to total health
-	totalHealth*0.2; totalHealth += GetHealth();
+	(totalHealth*0.2); totalHealth += GetHealth();
 	//If total is above 100, set to 100
 	if (totalHealth > 100) {
 		SetHealth(100);

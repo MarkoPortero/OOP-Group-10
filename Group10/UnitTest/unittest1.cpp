@@ -109,7 +109,7 @@ namespace Conflict_UnitTests
 
 			//Act
 			brawler.Defend(0); //invalid index! no armour in vector
-			actualIndex = brawler.GetEqippedArmour();
+			actualIndex = brawler.GetEquippedArmour();
 
 			//Assert
 			Assert::AreEqual(expectedIndex, actualIndex);
@@ -137,6 +137,7 @@ namespace Inventory_UnitTests
 
 			//Armour(std::string itemName, int itemValue, float itemWeight, int defence, int armourHealth, ArmourType ArmourType);
 			Armour glove{ "Leather glove", 3, 0.25f, 1, 100, ArmourType::Leather };
+
 			Armour chainMail{ "Chain Mail", 45, 85.0f, 200, 100, ArmourType::Steel };
 
 
@@ -279,7 +280,5 @@ namespace Inventory_UnitTests
 
 		}
 
-	};
-}
 	};
 }

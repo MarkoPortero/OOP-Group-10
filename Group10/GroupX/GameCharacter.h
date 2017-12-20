@@ -22,7 +22,9 @@ public:
 	GameCharacter();
 
 	GameCharacter(std::string characterName, float health, float weightLimit, int equippedWeapon, int equippedArmour,
-		std::vector<Weapon>weapons, std::vector<Armour>armour, int food);
+		std::vector<Weapon>weapons, std::vector<Armour>armour, int food, CharacterState state);
+
+	GameCharacter(std::string characterName, float health, float weightLimit, int food, CharacterState state);
 	~GameCharacter();
 
 	void SetCharacterName(std::string characterName);

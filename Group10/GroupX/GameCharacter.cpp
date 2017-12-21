@@ -119,7 +119,10 @@ bool GameCharacter::Attack(GameCharacter & character)
 void GameCharacter::Defend(int armour)
 {
 	state_ = Defending;
-	if (armour == -1)
+	if (armour_.empty()) {
+		SetEquippedArmour(-1);
+	}
+	else if (armour == -1)
 	{
 		SetEquippedArmour(-1);
 	}

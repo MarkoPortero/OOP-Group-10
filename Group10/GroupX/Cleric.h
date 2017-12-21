@@ -7,7 +7,7 @@ private:
 	int pietyLevel_;
 public:
 	Cleric(); // default constructor
-	Cleric(int pietyLevel, float health, std::string characterName, int food, float weightlimit, CharacterState state); // custom constructor
+	Cleric(std::string characterName, float health, float weightLimit, int food, CharacterState state, int pietyLevel); // custom constructor
 	~Cleric(); // default deconstructor
 			   //Setters and Getters
 	void SetPietyLevel(int pietyLevel);

@@ -1,37 +1,37 @@
 #include "Brawler.h"
-
+#include <time.h>
 
 //Default Constructor
 Brawler::Brawler()
 {
 }
-
+//Custom Constructor
 Brawler::Brawler(std::string name, float health, float weightLimit, int food, CharacterState state, int punchDamage, int strength) :
 	GameCharacter{name, health, weightLimit, food, state}, punchDamage_{ punchDamage }, strength_{ strength } {
 }
 
-
+//Set Punch damage
 void Brawler::SetPunchDamage(int punchDamage)
 {
 	punchDamage_ = punchDamage;
 }
-
+//Get Punch Damage
 int Brawler::GetPunchDamage()
 {
 	return punchDamage_;
 }
 
-
+//Set Strength
 void Brawler::SetStrength(int strength)
 {
 	strength_ = strength;
 }
-
+//Get Strength
 int Brawler::GetStrength()
 {
 	return strength_;
 }
-
+//Brawler Attack Function
 bool Brawler::Attack(GameCharacter &character)
 {
 
@@ -53,20 +53,21 @@ bool Brawler::Attack(GameCharacter &character)
 		Weapon CurrentWeapon = GetWeapon(GetEquippedWeapon());
 		Armour DefenderArmour;
 		//Make a random hit chance - Needs to be seeded 
+		srand(time(NULL));
 		int hitchance = rand() % 100 + 1;
 
 		//check if character has no armour
 		if (character.GetEquippedArmour() == -1) {
-			if (hitchance <= 80) {
+			if (hitchance >= 20) {
 				hitSuccess = true;
 			}
 		}
 		//If character has armour equipped, get the details of that armour - Maybe needs refactoring
 		if (character.GetEquippedArmour() != -1) {
-			DefenderArmour = character.GetArmour(GetEquippedArmour());
+			DefenderArmour = character.GetArmour(character.GetEquippedArmour()); 
 			//If Armour is better than weapon..
 			if (CurrentWeapon.GetWeaponHitStrength() < DefenderArmour.GetDefence()) {
-				if (hitchance <= 20) {
+				if (hitchance >= 80) {
 					hitSuccess = true;
 				}
 				else {
@@ -76,7 +77,7 @@ bool Brawler::Attack(GameCharacter &character)
 			}
 			//Less than/equal to? Assuming attacker has the advantage
 			else if (CurrentWeapon.GetWeaponHitStrength() >= DefenderArmour.GetDefence()) {
-				if (hitchance <= 60) {
+				if (hitchance >= 40) {
 					hitSuccess = true;
 				}
 				else {
@@ -92,12 +93,13 @@ bool Brawler::Attack(GameCharacter &character)
 			//Take weapon damage if the enemy is wearing armour.
 			int wepHealth = GetWeapon(GetEquippedWeapon()).GetWeaponHealth();
 			int newhealth = 0;
-			newhealth -= (wepHealth / 100)*damageAmount;
-			GetWeapon(GetEquippedWeapon()).SetWeaponHealth_(newhealth);
+			newhealth = (wepHealth / 100)*damageAmount;
+			wepHealth - newhealth;
+			GetWeapon(GetEquippedWeapon()).SetWeaponHealth_(wepHealth);
 
 			//Check if the weapon should be dropped
 			if (newhealth < 0) {
-				this->DropItem(GetWeapon(GetEquippedWeapon()));
+				DropItem(GetWeapon(GetEquippedWeapon()));
 			}
 
 		}
@@ -105,13 +107,13 @@ bool Brawler::Attack(GameCharacter &character)
 		if (hitSuccess == true)
 		{
 			//Hit was successful..Take away armour health
-			int curArmourHealth = character.GetArmour(GetEquippedArmour()).GetArmourHealth() - 10;
-			character.GetArmour(GetEquippedArmour()).SetArmourHealth(curArmourHealth);
+			int curArmourHealth = character.GetArmour(character.GetEquippedArmour()).GetArmourHealth() - 10;
+			character.GetArmour(character.GetEquippedArmour()).SetArmourHealth(curArmourHealth);
 			if (curArmourHealth <= 0) {
-				character.DropItem(GetArmour(GetEquippedArmour()));
+				character.DropItem(character.GetArmour(character.GetEquippedArmour()));
 			}
 			//Check brawler strength bonus
-			int strength = this->GetStrength();
+			int strength = GetStrength();
 			strength = (strength / 10) * 5;
 			//Using Rosa's switch idea
 			float totalHealth = character.GetHealth(); 
@@ -151,7 +153,7 @@ bool Brawler::Attack(GameCharacter &character)
 	}
 	return false;
 }
-
+//Brawler go to sleep function
 void Brawler::Sleep()
 {
 	//Set to sleeping..
@@ -169,7 +171,7 @@ void Brawler::Sleep()
 	}
 
 }
-
+//Brawler Brawl function
 bool Brawler::Brawl(GameCharacter &character)
 {
 	bool hitSuccess = false;
@@ -264,9 +266,7 @@ bool Brawler::Brawl(GameCharacter &character)
 
 
 
-
+//Brawler destructor
 Brawler::~Brawler()
 {
-
-	//std::cout << "Brawler destructor called"" << std::endl;
 }

@@ -23,6 +23,42 @@ namespace Assignment_UnitTests
 			Assert::AreEqual(expectedName, characterName);
 		}
 
+		TEST_METHOD(TestClericConstructor)
+		{
+			//Arrange the data
+			std::string expectedName{ "Jim" };
+			float expectedHealth{ 100.0f };
+			float expectedWeightLim{ 120.0f };
+			int expectedfood{ 50 };
+			int expectedPiety{ 60 };
+			//Cleric(std::string name, float health, float weightLimit, int food,CharacterState state, int piety level);
+			Cleric cleric{ "Jim", 100.0f, 120.0f, 50, CharacterState::Idle, 60,};
+
+			//Act
+			std::string characterName = cleric.GetCharacterName();
+			float health = cleric.GetHealth();
+			float weightLimit = cleric.GetWeightLimit();
+			int food = cleric.GetFood();
+			CharacterState state = cleric.GetState();
+			int piety = cleric.GetPietyLevel();
+
+			int expectedState{ 0 }, actualState;
+			//Brawler(std::string name, float health, float weightLimit, int food,CharacterState state, int punchDamage, int strength);
+			
+
+			actualState = cleric.GetState();
+
+			//Assert
+			Assert::AreEqual(expectedState, actualState);
+			//Assert
+			Assert::AreEqual(expectedName, characterName);
+			Assert::AreEqual(expectedHealth, health);
+			Assert::AreEqual(expectedWeightLim, weightLimit);
+			Assert::AreEqual(expectedfood, food);
+			Assert::AreEqual(expectedState, actualState);
+			Assert::AreEqual(expectedPiety, piety);
+		}
+
 		TEST_METHOD(TestEatConsumesFood)
 		{
 			//Tests that food gets consumed by eat function
@@ -145,7 +181,7 @@ namespace Inventory_UnitTests
 			addItemResult = brawler.PickUpWeapon(spear);
 			addItemResult = brawler.PickUpArmour(glove);
 			addItemResult = brawler.PickUpArmour(chainMail);
-
+			
 			//Assert - add weapon should be false as the weight exceeds the limit
 			Assert::IsFalse(addItemResult);
 		}
@@ -278,6 +314,38 @@ namespace Inventory_UnitTests
 			//Assert
 			Assert::AreEqual(expectedArmourName, actualArmourName);
 
+		}
+		TEST_METHOD(TestBrawlerAttack)
+		{
+
+			// Arange the data
+			bool expectedResult{ true }, actualResult;
+
+			//Brawler(std::string characterName, float health, float weightLimit, int food, CharacterState characterState, int ferociousness, int strength);
+			Brawler brawler{ "Phil", 100.0f, 110.0f, 30, CharacterState::Idle, 45, 40 };
+
+			//Cleric(std::string characterName, float health, float weightLimit, int food, CharacterState characterState, int pietyLevel);
+			Cleric cleric{ "Clarence", 100.0f, 120.0f, 50, CharacterState::Idle, 60 };
+
+			//Weapon(std::string name, int value, float weight, int hitStrength, int health);
+			Weapon spear{ "spear", 15, 6.0f, 25, 100 };
+
+			//Armour(std::string itemName, int itemValue, float itemWeight, int defence, int armourHealth, ArmourType ArmourType);
+			Armour chainMail{ "Chain Mail", 45, 85.0f, 200, 100, ArmourType::Steel };
+
+			//Act
+			brawler.PickUpWeapon(spear);
+			brawler.EquipWeapon(0);
+			cleric.PickUpArmour(chainMail);
+			cleric.Defend(0);
+			cleric.Run(); //Sets the cleric's state to running.
+
+			while (cleric.GetHealth() == 100) {
+				actualResult = brawler.Attack(cleric);
+			}
+
+			//Assert
+			Assert::AreEqual(expectedResult, actualResult);
 		}
 
 	};

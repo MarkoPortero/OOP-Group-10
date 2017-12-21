@@ -7,9 +7,9 @@ Cleric::Cleric()
 {
 }
 // Custom Constructor
-Cleric::Cleric(int pietyLevel, float health, std::string characterName, int food, float weightlimit, CharacterState state)
+Cleric::Cleric(std::string characterName, float health, float weightLimit, int food, CharacterState state, int pietyLevel) :
+	GameCharacter{ characterName, health, weightLimit, food, state }, pietyLevel_{ pietyLevel }
 {
-	pietyLevel_ = pietyLevel;
 }
 // Default Deconstructor
 Cleric::~Cleric()

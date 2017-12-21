@@ -118,17 +118,13 @@ bool GameCharacter::Attack(GameCharacter & character)
 
 void GameCharacter::Defend(int armour)
 {
-	Armour Equipped;
 	state_ = Defending;
-	if (armour > 0 && armour < armour_.size())
-	{	
-		//May be required?
-		Equipped = armour_[armour];
-		//Change state..Change equipped..
-		equippedArmour_ = armour;
+	if (armour == -1)
+	{
+		SetEquippedArmour(-1);
 	}
-	else {
-		equippedArmour_ = -1;
+	else if (armour <= armour_.size() - 1) {
+		SetEquippedArmour(armour);
 	}
 }
 
@@ -169,14 +165,12 @@ void GameCharacter::Sleep()
 
 Weapon GameCharacter::GetWeapon(int index)
 {	
-	Weapon weaponReturn = weapons_[index];
-	return weaponReturn;
+	return weapons_[index];
 }
 
 Armour GameCharacter::GetArmour(int index)
 {
-	Armour armourReturn = armour_[index];
-	return armourReturn;
+	return armour_[index];
 }
 
 bool GameCharacter::PickUpWeapon(Weapon &weapon)
@@ -263,6 +257,7 @@ bool GameCharacter::EquipWeapon(int weapon)
 		return true;
 	}
 	else if (weapon <= weapons_.size() - 1) {
+		equippedWeapon_ = weapon;
 		return true;
 	}
 	return false;

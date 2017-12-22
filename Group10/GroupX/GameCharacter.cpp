@@ -8,8 +8,8 @@
 GameCharacter::GameCharacter()
 {
 }
-
-GameCharacter::GameCharacter(std::string characterName, float health, float weightLimit, int equippedWeapon, int equippedArmour, 
+//Constructor <- Don't need?
+GameCharacter::GameCharacter(std::string characterName, float health, float weightLimit, int equippedWeapon, int equippedArmour,
 	std::vector<Weapon> weapons, std::vector<Armour> armour, int food, CharacterState state)
 {
 	characterName_ = characterName;
@@ -22,7 +22,7 @@ GameCharacter::GameCharacter(std::string characterName, float health, float weig
 	food_ = food;
 	state_ = state;
 }
-
+//Custom Constructor..
 GameCharacter::GameCharacter(std::string characterName, float health, float weightLimit, int food, CharacterState state) : characterName_{ characterName },
 health_{ health }, weightLimit_{ weightLimit }, food_{ food }, state_{ state } {
 }
@@ -30,92 +30,93 @@ health_{ health }, weightLimit_{ weightLimit }, food_{ food }, state_{ state } {
 GameCharacter::~GameCharacter()
 {
 }
-
+//set name
 void GameCharacter::SetCharacterName(std::string characterName)
 {
 	characterName_ = characterName;
 }
-
+//get name
 std::string GameCharacter::GetCharacterName()
 {
 	return characterName_;
 }
-
+//set health
 void GameCharacter::SetHealth(float health)
 {
 	health_ = health;
 }
-
+//get health
 float GameCharacter::GetHealth()
 {
 	return health_;
 }
-
+//set weight lim
 void GameCharacter::SetWeightLimit(float weightLimit)
 {
 	weightLimit_ = weightLimit;
 }
-
+//get weight lim
 float GameCharacter::GetWeightLimit()
 {
 	return weightLimit_;
 }
-
+//set equipped
 void GameCharacter::SetEquippedWeapon(int equippedWeapon)
 {
 	equippedWeapon_ = equippedWeapon;
 }
-
+//get equipped
 int GameCharacter::GetEquippedWeapon()
 {
 	return equippedWeapon_;
 }
-
+//Set equipped
 void GameCharacter::SetEquippedArmour(int equippedArmour)
 {
 	equippedArmour_ = equippedArmour;
 }
-
+//Get equipped
 int GameCharacter::GetEquippedArmour()
 {
+
 	return equippedArmour_;
 }
-
+//Set food
 void GameCharacter::SetFood(int food)
 {
 	food_ = food;
 }
-
+//Get food
 int GameCharacter::GetFood()
 {
 	return food_;
 }
-
+//Set weapon
 void GameCharacter::SetWeapons(vector<Weapon> weapons)
 {
 	weapons_ = weapons;
 }
-
+//Get weapon
 vector<Weapon> GameCharacter::GetWeapons()
 {
 	return weapons_;
 }
-
+//Set armour
 void GameCharacter::SetArmour(vector<Armour> armour)
 {
 	armour_ = armour;
 }
-
+//Get Armour
 vector<Armour> GameCharacter::GetArmour()
 {
 	return armour_;
 }
-
+//Attack..Empty
 bool GameCharacter::Attack(GameCharacter & character)
 {
 	return false;
 }
-
+//Set to defend - Equip Armour
 void GameCharacter::Defend(int armour)
 {
 	state_ = Defending;
@@ -131,12 +132,12 @@ void GameCharacter::Defend(int armour)
 	}
 }
 
-
+//Add Food
 void GameCharacter::AddFood(int amount)
 {
 	food_ = food_ += amount;
 }
-
+//Tell Char to eat
 void GameCharacter::Eat()
 {
 	float totalFoodConsumed;
@@ -151,31 +152,42 @@ void GameCharacter::Eat()
 	}
 }
 
+//Damage Weapon
+void GameCharacter::DamageWeapon(int damage)
+{
+	weapons_[equippedWeapon_].SetWeaponHealth_(damage);
+}
+//Damage Armour
+void GameCharacter::DamageArmour(int damage)
+{
+	armour_[equippedArmour_].SetArmourHealth(damage);
+}
+//Set state to walk
 void GameCharacter::Walk()
 {
 	state_ = Walking;
 }
-
+//Set state to run
 void GameCharacter::Run()
 {
 	state_ = Running;
 }
-
+//set state to sleep
 void GameCharacter::Sleep()
 {
 	state_ = Sleeping;
 }
-
+//get weapon
 Weapon GameCharacter::GetWeapon(int index)
-{	
+{
 	return weapons_[index];
 }
-
+//Get armour
 Armour GameCharacter::GetArmour(int index)
 {
 	return armour_[index];
 }
-
+//Pickup weapon
 bool GameCharacter::PickUpWeapon(Weapon &weapon)
 {
 	int currentTotalWeight = 0;
@@ -188,10 +200,10 @@ bool GameCharacter::PickUpWeapon(Weapon &weapon)
 	if (currentTotalWeight + weapon.GetWeight() <= GetWeightLimit()) {
 		weapons_.push_back(weapon);
 		return true;
-	}	
+	}
 	return false;
 }
-
+//Pickup Armour
 bool GameCharacter::PickUpArmour(Armour &armour)
 {
 	int currentTotalWeight = 0;
@@ -207,7 +219,7 @@ bool GameCharacter::PickUpArmour(Armour &armour)
 	}
 	return false;
 }
-
+//Drop armour
 void GameCharacter::DropItem(Armour &item)
 {
 	std::string itemName = item.GetItemName();
@@ -229,13 +241,13 @@ void GameCharacter::DropItem(Armour &item)
 		}
 	}
 }
-
+//Drop item
 void GameCharacter::DropItem(Weapon &item)
 {
 	std::string itemName = item.GetItemName();
 	bool found = false;
 	for (int i = 0; i < weapons_.size(); i++) {
-		
+
 		if (weapons_[i].GetItemName() == item.GetItemName()) {
 			if (item.GetItemValue() == weapons_[i].GetItemValue()) {
 				if (item.GetWeight() == weapons_[i].GetWeight()) {
@@ -251,12 +263,12 @@ void GameCharacter::DropItem(Weapon &item)
 		}
 	}
 }
-
+//Equip Weapon
 bool GameCharacter::EquipWeapon(int weapon)
 {
 	if (weapon == -1)
 	{
-		equippedWeapon_ = -1;	
+		equippedWeapon_ = -1;
 		return true;
 	}
 	else if (weapon <= weapons_.size() - 1) {
@@ -265,7 +277,7 @@ bool GameCharacter::EquipWeapon(int weapon)
 	}
 	return false;
 }
-
+//Get current state.
 CharacterState GameCharacter::GetState()
 {
 	return GameCharacter::state_;

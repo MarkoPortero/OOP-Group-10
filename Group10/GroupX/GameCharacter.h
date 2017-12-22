@@ -80,5 +80,9 @@ public:
 	void AddFood(int amount);
 
 	void Eat();
+
+	void DamageWeapon(int damage);
+
+	void DamageArmour(int damage);
 };
 
